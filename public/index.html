@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Encrypted Chat Room</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container hero hero-large">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">Encrypted Chat Room</p>
+        <h1>Start a private secure conversation</h1>
+        <p class="subtext">Create a room, share the link with a friend, and verify fingerprints to begin encrypted messaging.</p>
+      </div>
+    </header>
+
+    <section class="join-panel card">
+      <label>
+        Room ID
+        <input id="roomId" placeholder="room-123" value="room-123" />
+      </label>
+      <label>
+        Username
+        <input id="username" placeholder="Alice" value="Alice" />
+      </label>
+      <label>
+        Relay auth token
+        <input id="authToken" type="password" placeholder="Optional token" />
+      </label>
+      <button id="joinBtn" class="primary-btn">Enter chat room</button>
+      <div id="status" class="status info">Open this page locally and use the same room link in another browser to begin.</div>
+    </section>
+  </div>
+
+  <script>
+    const joinBtn = document.getElementById('joinBtn');
+    const roomIdInput = document.getElementById('roomId');
+    const usernameInput = document.getElementById('username');
+    const authTokenInput = document.getElementById('authToken');
+    const statusField = document.getElementById('status');
+
+    joinBtn.addEventListener('click', () => {
+      const roomId = roomIdInput.value.trim();
+      const username = usernameInput.value.trim();
+      if (!roomId || !username) {
+        statusField.textContent = 'Enter both a room ID and a username.';
+        statusField.className = 'status error';
+        return;
+      }
+      const params = new URLSearchParams({ roomId, username });
+      if (authTokenInput.value.trim()) {
+        params.set('authToken', authTokenInput.value.trim());
+      }
+      window.location.href = `chat.html?${params.toString()}`;
+    });
+  </script>
+</body>
+</html>

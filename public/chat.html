@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Encrypted Chat Room</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container chat-container">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">Encrypted Chat Room</p>
+        <h1>Secure conversation</h1>
+        <p class="subtext">Messages and images are encrypted in your browser before they leave the device.</p>
+      </div>
+      <div class="room-summary">
+        <div class="room-title">Room ID: <span id="roomTitle">—</span></div>
+        <div class="room-meta">You are: <span id="usernameDisplay">—</span></div>
+        <div class="room-fingerprint">Your fingerprint: <span id="yourFingerprint">—</span></div>
+      </div>
+    </header>
+
+    <div id="status" class="status info">Connecting to the room…</div>
+
+    <div class="chat-layout">
+      <main class="chat-main">
+        <div class="verification-panel" id="verificationPanel">
+          <div class="verification-title">Verify before chatting</div>
+          <p class="verification-text">Confirm the peer fingerprint below with the person you are chatting with. Messaging is disabled until verification is complete.</p>
+        </div>
+
+        <div id="chatLog" class="chat-log"></div>
+
+        <div class="message-actions">
+          <div class="message-row">
+            <textarea id="messageInput" rows="2" placeholder="Write a secure message..." autocomplete="off"></textarea>
+            <button id="sendBtn" class="primary-btn">Send</button>
+          </div>
+
+          <div class="image-row">
+            <label class="file-label">
+              <input id="imageInput" type="file" accept="image/*" />
+              Choose image
+            </label>
+            <button id="uploadBtn" class="secondary-btn">Send image</button>
+          </div>
+
+          <div id="previewPanel" class="preview-panel hidden">
+            <div class="preview-header">
+              <strong>Image preview</strong>
+              <button id="clearPreviewBtn" class="icon-btn" title="Clear preview">✕</button>
+            </div>
+            <img id="previewImage" class="preview-image" alt="Selected preview" />
+            <div id="previewInfo" class="preview-info"></div>
+          </div>
+        </div>
+      </main>
+
+      <aside class="chat-sidebar">
+        <div class="peer-card">
+          <h2>Connected peers</h2>
+          <div id="peerList" class="peer-list"></div>
+        </div>
+        <button id="logoutBtn" class="logout-btn">Leave room</button>
+      </aside>
+    </div>
+
+    <div class="visually-hidden">
+      <input id="roomId" type="hidden" />
+      <input id="username" type="hidden" />
+      <input id="authToken" type="hidden" />
+    </div>
+  </div>
+  <script src="chat.js"></script>
+</body>
+</html>
